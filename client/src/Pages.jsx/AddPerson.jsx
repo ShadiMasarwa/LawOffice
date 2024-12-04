@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const AddPerson = () => {
   const [client, setClient] = useState({
@@ -23,6 +24,7 @@ const AddPerson = () => {
   const [phone, setPhone] = useState({ type: 1, num: "", note: "" });
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setClient((prevClient) => ({
@@ -66,7 +68,7 @@ const AddPerson = () => {
     }, 3000);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
     const options = { timeZone: "Asia/Jerusalem" }; 
@@ -81,14 +83,28 @@ const AddPerson = () => {
     });
     const formattedDate = formatter.format(now);
 
-    setClient((prevClient) => ({
-      ...prevClient,
+    // setClient((prevClient) => ({
+    //   ...prevClient,
+    //   addDate: formattedDate,
+    //   addedBy: "Shadi",
+    // }));
+
+     const newClient = {
+      ...client,
       addDate: formattedDate,
       addedBy: "Shadi",
-    }));
-    console.log(client);
-    ShowToast(client.fname, client.lname);
-  };
+      };
+
+     try {
+        const response = await axios.post('http://localhost:3500/api/people', newClient);
+        console.log('Saved person:', response.data);
+        ShowToast(client.fname, client.lname);
+      } catch (error) {
+        console.error('Error saving person:', error);
+        ShowToast("Problem", "client.lname");
+
+      }
+    };
 
   return (
     <div>
