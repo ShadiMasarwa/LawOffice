@@ -16,36 +16,30 @@ const Header = () => {
     //     מחובר:<span className="text-success"> עו"ד מצארוה שאדי</span>
     //   </section>
     // </header>
-    <header className="row p-2 bg-Tertiary">
+    <header className="row p-2" style={{ backgroundColor: "#9b9ba8" }}>
       <div
         id="id"
-        className="col-md-3 d-flex flex-row  align-items-center gap-2"
+        className="col-md-4 d-flex flex-row justify-content-center justify-content-md-start align-items-center gap-2"
       >
         <img src={logo} alt="logo" style={{ width: "20px" }} className="ms-2" />
-        <h5 className="my-1 p-1 fw-bold text-primary d-none d-md-block">
+        <h5 className="my-1 p-1 fw-bold text-primary  d-md-block">
           משפט נט - ניהול משרד עורך דין
         </h5>
       </div>
       <div
-        id="Messages"
-        className="col-md-3 d-flex gap-4 justify-content-center text-white align-items-center"
-      >
-        <i class="bi bi-envelope"></i>
-        <i class="bi bi-envelope"></i>
-        <i class="bi bi-envelope"></i>
-        <i class="bi bi-envelope"></i>
-      </div>
-      <div
         id="office_name"
-        className="col-md-3 text-white d-flex align-items-center"
+        className="col-md-4 text-white d-flex align-items-center justify-content-center fw-bold"
       >
         משרד עורך דין אהרון כהן
       </div>
       <div
-        id="user"
-        className="col-md-3 d-flex justify-content-end align-items-center"
+        id="Messages"
+        className="col-md-4 d-flex gap-4 justify-content-center justify-content-md-end text-white align-items-center"
       >
-        מחובר: <span className="text-success">שלמה לקר</span>
+        <i className="bi bi-person"></i>
+        <i className="bi bi-envelope"></i>
+        <i className="bi bi-envelope"></i>
+        <i className="bi bi-envelope"></i>
       </div>
     </header>
   );

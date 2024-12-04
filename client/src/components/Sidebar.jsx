@@ -1,26 +1,23 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import HomeSvg from "../Svgs/HomeSvg";
-import ManageSvg from "../Svgs/ManageSvg";
 import { useState } from "react";
-import CustomersSvg from "../Svgs/CustomersSvg";
 import Home from "../Pages.jsx/Home";
 import Customers from "../Pages.jsx/Customers";
 import Files from "../Pages.jsx/Files";
-import FolderSvg from "../Svgs/FolderSvg";
 import Manage from "../Pages.jsx/Manage";
 import AddCustomer from "../Pages.jsx/AddCustomer";
+import Calendar from "../Pages.jsx/Calendar";
+import "./SidebarStyle.css";
 
 const Sidebar = () => {
   const [showPage, setShowPage] = useState(1);
   const [showItems, setShowItems] = useState(false);
   const [fullSidebar, setFullSidebar] = useState(true);
+
   return (
     <div className="row flex-nowrap mt-1">
       <div
-        className={`col-1 ${
-          fullSidebar ? "col-md-2" : ""
-        } px-md-2 px-0 bg-light `}
-        style={{ cursor: "pointer" }}
+        className={`col-1 ${fullSidebar ? "col-md-2" : ""} px-md-2 px-0`}
+        style={{ cursor: "pointer", backgroundColor: "#9b9ba8" }}
       >
         {/* `" */}
         <div
@@ -39,22 +36,19 @@ const Sidebar = () => {
           </span>
 
           <div>
-            <p className="d-flex justify-content-center py-3 mb-md-0 me-md-auto text-primary text-decoration-none ">
+            {/* <p className="d-flex justify-content-center py-3 mb-md-0 me-md-auto text-primary text-decoration-none ">
               <span className="fs-5 d-none d-md-inline fw-bold ">תפריט</span>
-            </p>
-            <div className="d-grid gap-2">
+            </p> */}
+            <div className="d-grid gap-2 pt-3">
               <button
                 type="button"
                 onClick={() => setShowPage(1)}
                 className={
-                  showPage === 1
-                    ? "btn btn-primary"
-                    : "btn btn-light text-primary"
+                  showPage === 1 ? "btn sidebar_btn active" : "btn sidebar_btn"
                 }
-                style={{ textAlign: "right" }}
               >
                 <i>
-                  <HomeSvg />
+                  <i className="bi bi-house-door fs-5"></i>
                   <span
                     className={`ps-2 ${
                       fullSidebar ? "d-none d-md-inline" : "d-none"
@@ -68,8 +62,8 @@ const Sidebar = () => {
                 <button
                   className={`btn ${
                     showPage === 2 || showPage === 3
-                      ? "btn-primary"
-                      : "btn-light text-primary"
+                      ? "btn sidebar_btn active"
+                      : "btn sidebar_btn"
                   } dropdown-toggle`}
                   type="button"
                   onClick={() => {
@@ -77,7 +71,7 @@ const Sidebar = () => {
                   }}
                 >
                   <i>
-                    <CustomersSvg />
+                    <i className="bi bi-people fs-5"></i>
                     <span
                       className={`ps-2 ${
                         fullSidebar ? "d-none d-md-inline" : "d-none"
@@ -121,14 +115,12 @@ const Sidebar = () => {
                 type="button"
                 onClick={() => setShowPage(4)}
                 className={
-                  showPage === 4
-                    ? "btn btn-primary"
-                    : "btn btn-light text-primary"
+                  showPage === 4 ? "btn sidebar_btn active" : "btn sidebar_btn"
                 }
                 style={{ textAlign: "right" }}
               >
                 <i>
-                  <FolderSvg />
+                  <i className="bi bi-folder2-open fs-5"></i>
                   <span
                     className={`ps-2 ${
                       fullSidebar ? "d-none d-md-inline" : "d-none"
@@ -140,16 +132,33 @@ const Sidebar = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setShowPage(5)}
+                onClick={() => setShowPage(6)}
                 className={
-                  showPage === 5
-                    ? "btn btn-primary"
-                    : "btn btn-light text-primary"
+                  showPage === 6 ? "btn sidebar_btn active" : "btn sidebar_btn"
                 }
                 style={{ textAlign: "right" }}
               >
                 <i>
-                  <ManageSvg />
+                  <i className="bi bi-calendar3 fs-5"></i>
+                  <span
+                    className={`ps-2 ${
+                      fullSidebar ? "d-none d-md-inline" : "d-none"
+                    }`}
+                  >
+                    יומן
+                  </span>
+                </i>
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowPage(5)}
+                className={
+                  showPage === 5 ? "btn sidebar_btn active" : "btn sidebar_btn"
+                }
+                style={{ textAlign: "right" }}
+              >
+                <i>
+                  <i className="bi bi-speedometer2 fs-5"></i>
                   <span
                     className={`ps-2 ${
                       fullSidebar ? "d-none d-md-inline" : "d-none"
@@ -197,6 +206,7 @@ const Sidebar = () => {
           3: <AddCustomer />,
           4: <Files />,
           5: <Manage />,
+          6: <Calendar />,
         }[showPage] || <Home />}
       </div>
     </div>
