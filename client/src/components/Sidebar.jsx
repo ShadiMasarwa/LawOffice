@@ -4,7 +4,7 @@ import Home from "../Pages.jsx/Home";
 import Customers from "../Pages.jsx/Customers";
 import Files from "../Pages.jsx/Files";
 import Manage from "../Pages.jsx/Manage";
-import AddCustomer from "../Pages.jsx/AddCustomer";
+import AddPerson from "../Pages.jsx/AddPerson";
 import Calendar from "../Pages.jsx/Calendar";
 import "./SidebarStyle.css";
 
@@ -14,7 +14,7 @@ const Sidebar = () => {
   const [fullSidebar, setFullSidebar] = useState(true);
 
   return (
-    <div className="row flex-nowrap mt-1">
+    <div className="row flex-nowrap mt-1 align-items-center">
       <div
         className={`col-1 ${fullSidebar ? "col-md-2" : ""} px-md-2 px-0`}
         style={{ cursor: "pointer", backgroundColor: "#9b9ba8" }}
@@ -203,7 +203,7 @@ const Sidebar = () => {
         {{
           1: <Home />,
           2: <Customers />,
-          3: <AddCustomer />,
+          3: <AddPerson />,
           4: <Files />,
           5: <Manage />,
           6: <Calendar />,

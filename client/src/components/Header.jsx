@@ -37,7 +37,7 @@ const Header = () => {
         className="col-md-4 d-flex gap-4 justify-content-center justify-content-md-end text-white align-items-center"
       >
         <i className="bi bi-person"></i>
-        <i className="bi bi-envelope"></i>
+        <i className="bi bi-calendar3"></i>
         <i className="bi bi-envelope"></i>
         <i className="bi bi-envelope"></i>
       </div>

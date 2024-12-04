@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddCustomer = () => {
+const AddPerson = () => {
   const [client, setClient] = useState({
     fname: "",
     mname: "",
@@ -20,9 +20,9 @@ const AddCustomer = () => {
     addDate: "",
     addedBy: "",
   });
-
   const [phone, setPhone] = useState({ type: 1, num: "", note: "" });
-
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setClient((prevClient) => ({
@@ -56,10 +56,20 @@ const AddCustomer = () => {
     }));
   };
 
+  const ShowToast = (fname, lname) =>{
+     const message = `${fname} ${lname} נוסף/ה בהצלחה`;
+    setToastMessage(message);
+    setToastVisible(true);
+
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 3000);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const now = new Date();
-    const options = { timeZone: "Asia/Jerusalem" }; // Specify Israel timezone
+    const options = { timeZone: "Asia/Jerusalem" }; 
     const formatter = new Intl.DateTimeFormat("en-GB", {
       day: "2-digit",
       month: "2-digit",
@@ -71,17 +81,37 @@ const AddCustomer = () => {
     });
     const formattedDate = formatter.format(now);
 
-    // Update client state with formatted date
     setClient((prevClient) => ({
       ...prevClient,
       addDate: formattedDate,
       addedBy: "Shadi",
     }));
-    console.log("Client Info:", client);
+    console.log(client);
+    ShowToast(client.fname, client.lname);
   };
 
   return (
     <div>
+      {toastVisible && (
+        <div
+          className="toast show position-fixed bottom-0 end-0 m-3"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          style={{ zIndex: 1055 }}
+        >
+          <div className="toast-header bg-success text-white">
+            <strong className="me-auto">המידע נשמר</strong>
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => setToastVisible(false)}
+              aria-label="Close"
+            ></button>
+          </div>
+          <div className="toast-body fw-bold">{toastMessage}</div>
+        </div>
+      )}
       <h2 className="text-primary">הוספת אנשים</h2>
       <form
         className="row g-3 needs-validation"
@@ -482,4 +512,4 @@ const AddCustomer = () => {
   );
 };
 
-export default AddCustomer;
+export default AddPerson;
