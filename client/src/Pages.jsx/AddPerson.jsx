@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import Toast from "../components/Toast";
+import GlobalContext from "../Hooks/GlobalContext";
 
 const AddPerson = () => {
   const [client, setClient] = useState({
@@ -22,9 +24,9 @@ const AddPerson = () => {
     addedBy: "",
   });
   const [phone, setPhone] = useState({ type: 1, num: "", note: "" });
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
-  
+  const { toastVisible, setToastVisible, setToastResult, setToastMessage } =
+    useContext(GlobalContext);
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setClient((prevClient) => ({
@@ -58,20 +60,20 @@ const AddPerson = () => {
     }));
   };
 
-  const ShowToast = (fname, lname) =>{
-     const message = `${fname} ${lname} נוסף/ה בהצלחה`;
+  const ShowToast = (result, message) => {
     setToastMessage(message);
+    setToastResult(result);
     setToastVisible(true);
 
     setTimeout(() => {
       setToastVisible(false);
     }, 3000);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const now = new Date();
-    const options = { timeZone: "Asia/Jerusalem" }; 
+    const options = { timeZone: "Asia/Jerusalem" };
     const formatter = new Intl.DateTimeFormat("en-GB", {
       day: "2-digit",
       month: "2-digit",
@@ -82,52 +84,32 @@ const AddPerson = () => {
       ...options,
     });
     const formattedDate = formatter.format(now);
-
-    // setClient((prevClient) => ({
-    //   ...prevClient,
-    //   addDate: formattedDate,
-    //   addedBy: "Shadi",
-    // }));
-
-     const newClient = {
+    const newClient = {
       ...client,
       addDate: formattedDate,
       addedBy: "Shadi",
-      };
-
-     try {
-        const response = await axios.post('http://localhost:3500/api/people', newClient);
-        console.log('Saved person:', response.data);
-        ShowToast(client.fname, client.lname);
-      } catch (error) {
-        console.error('Error saving person:', error);
-        ShowToast("Problem", "client.lname");
-
-      }
     };
+    const updatedClient = {
+      ...newClient,
+      phones: newClient.phones.map(({ id, ...info }) => info),
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:3500/api/addPeople",
+        updatedClient
+      );
+      ShowToast(1, `(${client.fname} ${client.lname}) נשמר בהצלחה`);
+    } catch (error) {
+      ShowToast(
+        0,
+        `אירעה שגיאה בעת שמירת (${client.fname} ${client.lname}) למאגר נתונים!!`
+      );
+    }
+  };
 
   return (
     <div>
-      {toastVisible && (
-        <div
-          className="toast show position-fixed bottom-0 end-0 m-3"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-          style={{ zIndex: 1055 }}
-        >
-          <div className="toast-header bg-success text-white">
-            <strong className="me-auto">המידע נשמר</strong>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={() => setToastVisible(false)}
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="toast-body fw-bold">{toastMessage}</div>
-        </div>
-      )}
+      {toastVisible && <Toast />}
       <h2 className="text-primary">הוספת אנשים</h2>
       <form
         className="row g-3 needs-validation"

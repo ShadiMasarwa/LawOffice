@@ -9,4 +9,5 @@
 .active {
   border: 1px solid white;
   font-weight: bolder;
+  color: red;
 }

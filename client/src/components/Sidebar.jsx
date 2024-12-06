@@ -19,7 +19,6 @@ const Sidebar = () => {
         className={`col-1 ${fullSidebar ? "col-md-2" : ""} px-md-2 px-0`}
         style={{ cursor: "pointer", backgroundColor: "#9b9ba8" }}
       >
-        {/* `" */}
         <div
           className="d-flex flex-column justify-content-between align-items-center align-items-md-start px-3 pt-2 position-relative"
           style={{ minHeight: "90vh" }}
@@ -36,9 +35,6 @@ const Sidebar = () => {
           </span>
 
           <div>
-            {/* <p className="d-flex justify-content-center py-3 mb-md-0 me-md-auto text-primary text-decoration-none ">
-              <span className="fs-5 d-none d-md-inline fw-bold ">תפריט</span>
-            </p> */}
             <div className="d-grid gap-2 pt-3">
               <button
                 type="button"
