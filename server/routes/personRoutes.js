@@ -22,4 +22,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedCustomer = await CustomerModel.findByIdAndUpdate(
+      id,
+      updateData,
+      {
+        new: true,
+      }
+    );
+    res.status(200).json(updatedCustomer);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to update customer" });
+  }
+});
+
 module.exports = router;
