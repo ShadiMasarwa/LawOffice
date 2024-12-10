@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 connectDB();
 
 // Roures
-app.use("/api/addPeople", personRoutes);
+app.use("/api/people", personRoutes);
 
 // Start the Server
 app.listen(PORT, () => {

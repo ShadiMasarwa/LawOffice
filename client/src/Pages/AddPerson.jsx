@@ -50,6 +50,8 @@ const AddPerson = () => {
         phones: [...prevClient.phones, { ...phone, id: Date.now() }],
       }));
       setPhone({ type: 1, num: "", note: "" });
+    } else {
+      ShowToast(0, "לא הוכנס מספר טלפון");
     }
   };
 
@@ -95,7 +97,7 @@ const AddPerson = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3500/api/addPeople",
+        "http://localhost:3500/api/people",
         updatedClient
       );
       ShowToast(1, `(${client.fname} ${client.lname}) נשמר בהצלחה`);
@@ -415,10 +417,7 @@ const AddPerson = () => {
                       {index + 1}
                     </th>
                     <td className="py-0">{phone.num}</td>
-                    <td
-                      // style={{ paddingTop: "0", paddingBottom: "0" }}
-                      className="py-0"
-                    >
+                    <td className="py-0">
                       <span
                         className="text-danger"
                         style={{ cursor: "pointer" }}
@@ -426,11 +425,6 @@ const AddPerson = () => {
                       >
                         <i className="bi bi-trash3-fill fs-7"></i>
                       </span>
-                      {/* <button
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                        
-                      ></button> */}
                     </td>
                   </tr>
                 ))}
@@ -483,26 +477,9 @@ const AddPerson = () => {
           </div>
         </div>
 
-        <div className="col-12">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              id="invalidCheck"
-              required
-            />
-            <label className="form-check-label" htmlFor="invalidCheck">
-              Agree to terms and conditions
-            </label>
-            <div className="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        <div className="col-12">
+        <div className="col-12 text-end">
           <button className="btn btn-primary" type="submit">
-            Submit form
+            הוספה
           </button>
         </div>
       </form>

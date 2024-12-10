@@ -1,7 +1,10 @@
-import React from "react";
 import logo from "../images/scale.png";
+import GlobalContext from "../Hooks/GlobalContext";
+import { useContext } from "react";
 
 const Header = () => {
+  const { office } = useContext(GlobalContext);
+
   return (
     <header className="row p-2" style={{ backgroundColor: "#9b9ba8" }}>
       <div
@@ -17,7 +20,7 @@ const Header = () => {
         id="office_name"
         className="col-md-4 text-white d-flex align-items-center justify-content-center fw-bold"
       >
-        משרד עורך דין אהרון כהן
+        {office.name}
       </div>
       <div
         id="Messages"

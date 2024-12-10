@@ -1,0 +1,39 @@
+[
+  {
+    "title": "בית",
+    "icon": "bi bi-house-door",
+    "page": 1
+  },
+  {
+    "title": "אנשים",
+    "icon": "bi bi-people",
+    "page": 2,
+    "childrens": [
+      {
+        "title": "רשימת אנשים",
+        "icon": "bi bi-person-lines-fill",
+        "page": 3
+      },
+      {
+        "title": "הוספת אנשים",
+        "icon": "bi bi-person-fill-add",
+        "page": 4
+      }
+    ]
+  },
+  {
+    "title": "תיקים",
+    "icon": "bi bi-folder2-open",
+    "page": 5
+  },
+  {
+    "title": "יומן",
+    "icon": "bi bi-calendar3",
+    "page": 6
+  },
+  {
+    "title": "ניהול",
+    "icon": "bi bi-speedometer2",
+    "page": 7
+  }
+]

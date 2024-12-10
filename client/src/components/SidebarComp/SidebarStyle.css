@@ -1,0 +1,72 @@
+/* .sidebar_btn {
+  text-align: start;
+  background-color: #9b9ba8;
+  border: none;
+  color: white;
+  font-weight: normal;
+  width: 100%;
+}
+
+.active {
+  border: 1px solid white;
+  font-weight: bold;
+  color: red;
+}
+
+.sub-menu {
+  margin: 0.75rem 1.25rem 0 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.sub-menu:hover {
+  color: black;
+} */
+
+.sidebar_btn {
+  text-align: start;
+  background-color: #9b9ba8;
+  border: none;
+  color: white;
+  font-weight: 400;
+  width: 100%;
+}
+
+.sidebar_btn:hover {
+  color: red;
+}
+
+.active {
+  border: 1px solid white;
+  font-weight: 700;
+  color: red;
+}
+
+.sub-menu {
+  margin: 0;
+  padding: 0 1rem; /* Add padding to ensure proper alignment */
+  color: white;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.sub-menu:hover {
+  color: red;
+}
+
+.sidebar-submenu {
+  margin-right: 1.5rem; /* Indent submenu items */
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+.sidebar-submenu.open {
+  display: block; /* Show submenu */
+}
+
+.sidebar-submenu.closed {
+  display: none; /* Hide submenu */
+}
